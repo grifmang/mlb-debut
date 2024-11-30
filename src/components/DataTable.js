@@ -33,7 +33,7 @@ const DataTable = () => {
   return (
     <div className="data-table-container">
       <h1 className="data-table-header">2024 MLB Debut Patch Card hit list</h1>
-      <div style={{ height: 500, width: '100%' }}>
+      <div style={{ height: '80vh', width: '100%' }}>
         <DataGrid
           rows={rows}
           columns={columns}
