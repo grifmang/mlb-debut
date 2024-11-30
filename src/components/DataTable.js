@@ -32,7 +32,15 @@ const DataTable = () => {
 
   return (
     <div className="data-table-container">
-      <h1 className="data-table-header">2024 MLB Debut Patch Card hit list</h1>
+      {/* <h1 className="data-table-header"><img src='public\patch.jpg' alt='MLB Debut Patch Logo' />2024 MLB Debut Patch Card hit list</h1> */}
+      <h1 className="data-table-header">
+        <img 
+          src="/patch.jpg" 
+          alt="MLB Debut Patch Logo" 
+          style={{ height: '50px', marginRight: '10px' }}
+        />
+        2024 MLB Debut Patch Card Hit List
+      </h1>
       <div style={{ height: '80vh', width: '100%' }}>
         <DataGrid
           rows={rows}
