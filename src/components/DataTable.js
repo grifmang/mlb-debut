@@ -33,7 +33,7 @@ const DataTable = () => {
   return (
     <div className="data-table-container">
       {/* <h1 className="data-table-header"><img src='public\patch.jpg' alt='MLB Debut Patch Logo' />2024 MLB Debut Patch Card hit list</h1> */}
-      <h1 className="data-table-header header-color">
+      <h1 className="data-table-header">
         <img 
           src="/patch.jpg" 
           alt="MLB Debut Patch Logo" 
@@ -42,13 +42,28 @@ const DataTable = () => {
         2024 MLB Debut Patch Card Hit List
       </h1>
       <div style={{ height: '80vh', width: '100%' }}>
+        {/* <DataGrid
+          rows={rows}
+          columns={columns}
+          getRowClassName={(params) =>
+            params.row['HIT?'] ? 'row-hit' : '' // Apply styling based on the "HIT?" column
+          }
+        /> */}
         <DataGrid
           rows={rows}
           columns={columns}
           getRowClassName={(params) =>
             params.row['HIT?'] ? 'row-hit' : '' // Apply styling based on the "HIT?" column
           }
+          sx={{
+            '& .MuiDataGrid-columnHeaders': {
+              backgroundColor: '#f5f5f5', // Example header background color
+              color: '#333',
+              fontWeight: 'bold',
+            },
+          }}
         />
+
       </div>
     </div>
   );
