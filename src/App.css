@@ -13,8 +13,15 @@
 }
 
 .header-color {
-  background-color: grey !important;
+  background-color: rgb(177, 177, 177) !important;
 }
+
+.header-color .MuiDataGrid-columnHeaders {
+  background-color: #b9b9b9; /* Example color */
+  color: #333;
+  font-weight: bold;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

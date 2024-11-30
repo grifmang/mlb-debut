@@ -34,7 +34,7 @@ const scrapeDataFromSpreadsheet = async () => {
         spot++;
         continue;
       }
-      const cleanedRow = row.slice(0, 6).map((cell) =>
+      const cleanedRow = row.slice(0, 7).map((cell) =>
         cell.replace(/\xa0/g, '').replace('YES', true)
       );
       const rowObject = headers.reduce((obj, header, index) => {

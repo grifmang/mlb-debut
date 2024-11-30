@@ -15,7 +15,9 @@ const DataTable = () => {
       const dynamicColumns = headers.map((header) => ({
         field: header,
         headerName: header,
+        headerClassName: 'header-color',
         width: 150,
+        flex: 1
       }));
 
       setColumns(dynamicColumns);
@@ -32,7 +34,6 @@ const DataTable = () => {
 
   return (
     <div className="data-table-container">
-      {/* <h1 className="data-table-header"><img src='public\patch.jpg' alt='MLB Debut Patch Logo' />2024 MLB Debut Patch Card hit list</h1> */}
       <h1 className="data-table-header">
         <img 
           src="/patch.jpg" 
@@ -42,26 +43,12 @@ const DataTable = () => {
         2024 MLB Debut Patch Card Hit List
       </h1>
       <div style={{ height: '80vh', width: '100%' }}>
-        {/* <DataGrid
-          rows={rows}
-          columns={columns}
-          getRowClassName={(params) =>
-            params.row['HIT?'] ? 'row-hit' : '' // Apply styling based on the "HIT?" column
-          }
-        /> */}
         <DataGrid
           rows={rows}
           columns={columns}
           getRowClassName={(params) =>
-            params.row['HIT?'] ? 'row-hit' : '' // Apply styling based on the "HIT?" column
+            params.row['HIT?'] ? 'row-hit' : '' 
           }
-          sx={{
-            '& .MuiDataGrid-columnHeaders': {
-              backgroundColor: '#f5f5f5', // Example header background color
-              color: '#333',
-              fontWeight: 'bold',
-            },
-          }}
         />
 
       </div>
