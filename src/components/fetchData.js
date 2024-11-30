@@ -1,10 +1,6 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-/**
- * Scrapes data from the Google Spreadsheet and processes it.
- * @returns {Promise<{ headers: string[], rows: Array<Object> }>} Cleaned data with headers and rows.
- */
 const scrapeDataFromSpreadsheet = async () => {
   try {
     const url = 'https://docs.google.com/spreadsheets/d/1l2JK2aof5zgaexIJ7L_TDywnIPKM7Cd_4wZnXXcAih4/gviz/tq?tqx=out:html&tq&gid=1';
@@ -30,7 +26,7 @@ const scrapeDataFromSpreadsheet = async () => {
 
     for (const row of rows) {
       if (!spot) {
-        headers = row.slice(0, 6); // Extract first 6 columns as headers
+        headers = row.slice(0, 6);
         spot++;
         continue;
       }
@@ -41,7 +37,6 @@ const scrapeDataFromSpreadsheet = async () => {
         if (header === 'LINK') {
           const linkText = cleanedRow[index] || '';
           obj[header] = linkText
-            // ? `<a href="${linkText}" target="_blank" rel="noopener noreferrer">${linkText}</a>`
             ? `${linkText}`
             : '';
         } else {
