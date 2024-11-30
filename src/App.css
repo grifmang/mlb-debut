@@ -12,6 +12,10 @@
   color: white;
 }
 
+.header-color {
+  background-color: grey !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

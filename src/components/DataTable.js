@@ -33,7 +33,7 @@ const DataTable = () => {
   return (
     <div className="data-table-container">
       {/* <h1 className="data-table-header"><img src='public\patch.jpg' alt='MLB Debut Patch Logo' />2024 MLB Debut Patch Card hit list</h1> */}
-      <h1 className="data-table-header">
+      <h1 className="data-table-header header-color">
         <img 
           src="/patch.jpg" 
           alt="MLB Debut Patch Logo" 
