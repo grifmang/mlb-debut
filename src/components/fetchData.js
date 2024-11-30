@@ -38,7 +38,15 @@ const scrapeDataFromSpreadsheet = async () => {
         cell.replace(/\xa0/g, '').replace('YES', true)
       );
       const rowObject = headers.reduce((obj, header, index) => {
-        obj[header] = cleanedRow[index] || '';
+        if (header === 'LINK') {
+          const linkText = cleanedRow[index] || '';
+          obj[header] = linkText
+            // ? `<a href="${linkText}" target="_blank" rel="noopener noreferrer">${linkText}</a>`
+            ? `${linkText}`
+            : '';
+        } else {
+          obj[header] = cleanedRow[index] || '';
+        }
         return obj;
       }, {});
       cleanedRows.push(rowObject);
