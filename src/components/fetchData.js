@@ -90,12 +90,17 @@ const fetchSpreadsheetData = async () => {
           // cellValue = cellValue ? `<a href="${cellValue}">${cellValue}</a>` : '';
 
           if (header === 'LINK') {
+
+            const cleanedRow = row.slice(0, 5).map((cell) =>
+              cell.replace(/\xa0/g, '').replace('YES', true)
+            );
+
             const linkText = cleanedRow[index] || '';
-            obj[header] = linkText
+            row[header] = linkText
               ? `${linkText}`
               : '';
           } else {
-            obj[header] = cleanedRow[index] || '';
+            row[header] = cleanedRow[index] || '';
           }        
         }
         rowObject[header] = cellValue;
