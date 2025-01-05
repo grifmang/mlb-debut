@@ -73,12 +73,12 @@ const fetchSpreadsheetData = async () => {
       throw new Error('No data found in the spreadsheet.');
     }
 
-    const headers = data[0];
+    const headers = data[0].slice(0, 5);
     console.log(data)
     console.log(data.slice(1))
     const rows = data.slice(1).map((row) => {
       const rowObject = {};
-      headers.slice(0, 5).forEach((header, index) => {
+      headers.forEach((header, index) => {
         let cellValue = row[index] || '';
         if (header === 'HIT?') {
           cellValue = cellValue === 'YES';
