@@ -57,7 +57,6 @@
 // export default scrapeDataFromSpreadsheet;
 /////////////////////////////////////////////
 import axios from 'axios';
-require('dotenv').config();
 
 const fetchSpreadsheetData = async () => {
   const apiKey = process.env.SHEETS_API;
