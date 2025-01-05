@@ -56,6 +56,47 @@
 
 // export default scrapeDataFromSpreadsheet;
 /////////////////////////////////////////////
+// import axios from 'axios';
+
+// const fetchSpreadsheetData = async () => {
+//   const apiKey = process.env.REACT_APP_SHEETS_API;
+//   const spreadsheetId = '1l2JK2aof5zgaexIJ7L_TDywnIPKM7Cd_4wZnXXcAih4';
+//   const range = 'Sheet1!A1:Z1000'; // Adjust the range as needed
+
+//   const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
+
+//   try {
+//     const response = await axios.get(url);
+//     const data = response.data.values;
+
+//     if (!data || data.length === 0) {
+//       throw new Error('No data found in the spreadsheet.');
+//     }
+
+//     const headers = data[0];
+//     const rows = data.slice(1).map((row) => {
+//       const rowObject = {};
+//       headers.forEach((header, index) => {
+//         let cellValue = row[index] || '';
+//         if (header === 'HIT?') {
+//           cellValue = cellValue === 'YES';
+//         } else if (header === 'LINK') {
+//           cellValue = cellValue ? `<a href="${cellValue}">${cellValue}</a>` : '';
+//         }
+//         rowObject[header] = cellValue;
+//       });
+//       return rowObject;
+//     });
+
+//     return { headers, rows };
+//   } catch (error) {
+//     console.error('Error fetching or processing spreadsheet:', error);
+//     return { headers: [], rows: [] };
+//   }
+// };
+
+// export default fetchSpreadsheetData;
+
 import axios from 'axios';
 
 const fetchSpreadsheetData = async () => {
@@ -73,22 +114,36 @@ const fetchSpreadsheetData = async () => {
       throw new Error('No data found in the spreadsheet.');
     }
 
+    // Define only the required columns
+    const requiredColumns = ['Debut Patch Checklist', 'Hit', 'Date Hit', 'Where?', 'Link'];
+
+    // Find indexes of the required columns in the headers row
     const headers = data[0];
-    const rows = data.slice(1).map((row) => {
+    const columnIndexes = requiredColumns.map(col => headers.indexOf(col)).filter(index => index !== -1);
+
+    if (columnIndexes.length !== requiredColumns.length) {
+      throw new Error('One or more required columns are missing in the spreadsheet.');
+    }
+
+    // Extract only the required columns
+    const filteredRows = data.slice(1).map(row => {
       const rowObject = {};
-      headers.forEach((header, index) => {
-        let cellValue = row[index] || '';
-        if (header === 'HIT?') {
+      requiredColumns.forEach((col, i) => {
+        let cellValue = row[columnIndexes[i]] || '';
+
+        if (col === 'Hit') {
           cellValue = cellValue === 'YES';
-        } else if (header === 'LINK') {
+        } else if (col === 'Link') {
           cellValue = cellValue ? `<a href="${cellValue}">${cellValue}</a>` : '';
         }
-        rowObject[header] = cellValue;
+
+        rowObject[col] = cellValue;
       });
+
       return rowObject;
     });
 
-    return { headers, rows };
+    return { headers: requiredColumns, rows: filteredRows };
   } catch (error) {
     console.error('Error fetching or processing spreadsheet:', error);
     return { headers: [], rows: [] };
