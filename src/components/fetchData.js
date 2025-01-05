@@ -73,10 +73,6 @@ const fetchSpreadsheetData = async () => {
       throw new Error('No data found in the spreadsheet.');
     }
 
-    const cleanedRow = row.slice(0, 5).map((cell) =>
-      cell.replace(/\xa0/g, '').replace('YES', true)
-    );
-
     const headers = data[0].slice(0, 5);
     console.log(data)
     console.log(data.slice(1))
