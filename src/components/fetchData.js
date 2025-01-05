@@ -73,6 +73,10 @@ const fetchSpreadsheetData = async () => {
       throw new Error('No data found in the spreadsheet.');
     }
 
+    const cleanedRow = row.slice(0, 5).map((cell) =>
+      cell.replace(/\xa0/g, '').replace('YES', true)
+    );
+
     const headers = data[0].slice(0, 5);
     console.log(data)
     console.log(data.slice(1))
@@ -83,7 +87,16 @@ const fetchSpreadsheetData = async () => {
         if (header === 'HIT?') {
           cellValue = cellValue === 'YES';
         } else if (header === 'LINK') {
-          cellValue = cellValue ? `<a href="${cellValue}">${cellValue}</a>` : '';
+          // cellValue = cellValue ? `<a href="${cellValue}">${cellValue}</a>` : '';
+
+          if (header === 'LINK') {
+            const linkText = cleanedRow[index] || '';
+            obj[header] = linkText
+              ? `${linkText}`
+              : '';
+          } else {
+            obj[header] = cleanedRow[index] || '';
+          }        
         }
         rowObject[header] = cellValue;
       });
