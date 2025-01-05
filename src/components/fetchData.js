@@ -78,7 +78,7 @@ const fetchSpreadsheetData = async () => {
     console.log(data.slice(1))
     const rows = data.slice(1).map((row) => {
       const rowObject = {};
-      headers.forEach((header, index) => {
+      headers.slice(0, 5).forEach((header, index) => {
         let cellValue = row[index] || '';
         if (header === 'HIT?') {
           cellValue = cellValue === 'YES';
