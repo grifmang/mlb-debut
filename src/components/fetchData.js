@@ -84,13 +84,11 @@ const fetchSpreadsheetData = async () => {
           cellValue = cellValue === 'YES';
         } else if (header === 'LINK') {
           // cellValue = cellValue ? `<a href="${cellValue}">${cellValue}</a>` : '';
+          const cleanedRow = row.slice(0, 5).map((cell) =>
+            cell.replace(/\xa0/g, '').replace('YES', true)
+          );
 
           if (header === 'LINK') {
-
-            const cleanedRow = row.slice(0, 5).map((cell) =>
-              cell.replace(/\xa0/g, '').replace('YES', true)
-            );
-
             const linkText = cleanedRow[index] || '';
             row[header] = linkText
               ? `${linkText}`
