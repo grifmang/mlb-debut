@@ -59,7 +59,7 @@
 import axios from 'axios';
 
 const fetchSpreadsheetData = async () => {
-  const apiKey = process.env.SHEETS_API;
+  const apiKey = process.env.REACT_APP_SHEETS_API;
   const spreadsheetId = '1l2JK2aof5zgaexIJ7L_TDywnIPKM7Cd_4wZnXXcAih4';
   const range = 'Sheet1!A1:Z1000'; // Adjust the range as needed
 
